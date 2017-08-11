@@ -12,8 +12,8 @@ namespace SideWaffle.Creator
     /// </summary>
     internal sealed partial class PackageGuids
     {
-        public const string guidPackageString = "c1808f49-1e60-4c50-80e5-d4326d20c101";
-        public const string guidPackageCmdSetString = "5dc6b5ab-4b09-42fb-bd7f-5b6f6d6b3633";
+        public const string guidPackageString = "68e3cc79-56a7-4cc0-b2ef-80a6a54b14991";
+        public const string guidPackageCmdSetString = "b6154a9b-021d-4e60-9a60-4dae7af01d28";
         public static Guid guidPackage = new Guid(guidPackageString);
         public static Guid guidPackageCmdSet = new Guid(guidPackageCmdSetString);
     }
