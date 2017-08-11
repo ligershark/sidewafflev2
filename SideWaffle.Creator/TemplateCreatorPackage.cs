@@ -15,7 +15,7 @@ namespace SideWaffle.Creator
     [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionHasMultipleProjects_string, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionHasSingleProject_string, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    public sealed class SideWaffle.CreatorPackage : AsyncPackage
+    public sealed class SideWaffleCreatorPackage : AsyncPackage
     {
         protected async override Tasks.Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {

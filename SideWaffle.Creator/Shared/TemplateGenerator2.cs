@@ -5,8 +5,9 @@ using EnvDTE;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using SideWaffle.Creator;
 
-namespace SideWaffle.Creator.Shared {
+namespace TemplateCreator {
     public class TemplateGenerator2 {
         private JObject _templateInfo { get; set; }
         public IList<string> AddMissingFiles(Project proj) {

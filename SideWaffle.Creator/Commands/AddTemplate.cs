@@ -3,9 +3,9 @@ using System.ComponentModel.Design;
 using System.IO;
 using EnvDTE;
 using Microsoft.VisualStudio.Shell;
-using SideWaffle.Creator.Shared;
 using System.Collections;
 using System.Collections.Generic;
+using TemplateCreator;
 
 namespace SideWaffle.Creator
 {
