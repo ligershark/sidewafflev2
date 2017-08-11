@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <Extern href="stdidcmd.h"/>
+  <Extern href="vsshlids.h"/>
+  <Include href="KnownImageIds.vsct"/>
+
+  <Commands package="guidPackage">
+    <Groups>
+      <Group guid="guidPackageCmdSet" id="MenuGroup" priority="0x0200">
+        <Parent guid="guidPackageCmdSet" id="Menu"/>
+      </Group>
+    </Groups>
+
+    <Menus>
+      <Menu guid="guidPackageCmdSet" id="Menu" priority="0x0200" type="Menu">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_FOLDER_ADD" />
+        <Strings>
+          <ButtonText>Template Creator</ButtonText>
+        </Strings>
+      </Menu>
+    </Menus>
+
+    <Buttons>
+      <!-- Project -->
+      <Button guid="guidPackageCmdSet" id="AddTemplate" priority="0x0600" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_BUILD" />
+        <Icon guid="ImageCatalogGuid" id="GenerateAllFromTemplate" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultDisabled</CommandFlag>
+        <Strings>
+          <ButtonText>Create Template...</ButtonText>
+        </Strings>
+      </Button>
+
+      <!-- Folder -->
+      <Button guid="guidPackageCmdSet" id="AddVsHost" priority="0x0600" type="Button">
+        <Parent guid="guidPackageCmdSet" id="MenuGroup" />
+        <Icon guid="ImageCatalogGuid" id="VisualStudioSettingsFile" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultDisabled</CommandFlag>
+        <Strings>
+          <ButtonText>Add Visual Studio Host File</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidPackageCmdSet" id="AddCliHost" priority="0x0600" type="Button">
+        <Parent guid="guidPackageCmdSet" id="MenuGroup" />
+        <Icon guid="ImageCatalogGuid" id="Console" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultDisabled</CommandFlag>
+        <Strings>
+          <ButtonText>Add .NET CLI Host File</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+  </Commands>
+
+  <Symbols>
+    <GuidSymbol name="guidPackage" value="{c1808f49-1e60-4c50-80e5-d4326d20c101}" />
+
+    <GuidSymbol name="guidPackageCmdSet" value="{5dc6b5ab-4b09-42fb-bd7f-5b6f6d6b3633}">
+      <IDSymbol name="MenuGroup" value="0x0002" />
+      <IDSymbol name="Menu" value="0x0100" />
+      <IDSymbol name="AddTemplate" value="0x1000" />
+      <IDSymbol name="AddVsHost" value="0x1100" />
+      <IDSymbol name="AddCliHost" value="0x1200" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>

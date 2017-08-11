@@ -1,0 +1,41 @@
+﻿<Window x:Class="SideWaffle.Creator.InfoCollectorDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d" WindowStyle="ToolWindow" ResizeMode="NoResize" Title="Template Info"
+        ShowInTaskbar="False" Width="340" Height="240" WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="WrapWithOverflow" Margin="5,0,0,10">This will create a '.template.config' folder in the root of the project.</TextBlock>
+
+        <Label Grid.Row="1" Grid.Column="0" Width="100">Author</Label>
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="AuthorTextBox" Margin="2" />
+
+        <Label Grid.Row="2" Grid.Column="0">Friendly Name</Label>
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="FriendlyNameTextBox" Margin="2" />
+
+        <Label Grid.Row="3" Grid.Column="0">Default Name</Label>
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="DefaultNameTextBox" Margin="2" />
+
+        <Label Grid.Row="4" Grid.Column="0">Short Name</Label>
+        <TextBox Grid.Row="4" Grid.Column="1" x:Name="ShortNameTextBox" Margin="2" />
+
+        <StackPanel Orientation="Horizontal" Grid.Row="6" HorizontalAlignment="Right" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,0">
+            <Button Click="OnOk" Width="80" Margin="3" IsDefault="True">OK</Button>
+            <Button Click="OnCancel" Width="80" Margin="3" IsCancel="True">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Window>
