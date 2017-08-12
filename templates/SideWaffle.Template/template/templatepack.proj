@@ -7,15 +7,15 @@
           Condition=" '$(TemplatePackPropsFilePath)' != '' and Exists('$(TemplatePackPropsFilePath)') " />
 
   <PropertyGroup Label="TemplatePackInfo">
-    <Authors>Sayed Ibrahim Hashimi</Authors>
-    <Description>Template pack project template</Description>
+    <Authors>Your name here</Authors>
+    <Description>A description for your template pack</Description>
     <Version>1.0.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Label="PackageConfiguration">
     <TargetFramework>netstandard1.0</TargetFramework>
     <PackageType>Template</PackageType>
-    <TemplateSourceRoot Condition=" '$(TemplateSourceRoot)'=='' ">$(MSBuildThisFileDirectory)../../templates/</TemplateSourceRoot>
+    <TemplateSourceRoot>$(MSBuildThisFileDirectory)</TemplateSourceRoot>
   </PropertyGroup>
   
   <ItemGroup>
@@ -25,6 +25,7 @@
     <ExcludeFromPackage Include="$(TemplateSourceRoot)**/*.suo" />
     <ExcludeFromPackage Include="$(TemplateSourceRoot)**/*.vs/**/*" />
     <ExcludeFromPackage Include="$(TemplateSourceRoot)**/*.git/**/*" />
+    <ExcludeFromPackage Include="$(TemplateSourceRoot)**/packages/**/*" />
 
     <TemplateFiles  Include="$(TemplateSourceRoot)/**/*" 
                     Exclude="@(ExcludeFromPackage)" />

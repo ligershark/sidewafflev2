@@ -1,9 +1,9 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="ProjectGroup">
   <TemplateData>
-    <Name>**Template name here</Name>
-    <Description>**Template description here</Description>
-    <TemplateID>Your.Template.ID.Here</TemplateID>
-    <DefaultName>NewProject</DefaultName>
+    <Name>Template pack project template (SideWaffle)</Name>
+    <Description>Makes it easy to create a template pack</Description>
+    <TemplateID>SideWaffle.TemplatePack.01</TemplateID>
+    <DefaultName>VsixProject</DefaultName>
     
     <Icon>project-icon.png</Icon>
     
@@ -21,7 +21,7 @@
       <CustomParameter Name="$language$" Value="CSharp" />
       <CustomParameter Name="$uistyle$" Value="none"/>
       <CustomParameter Name="$groupid$" Value="MyProject.01.Sample" />
-      <CustomParameter Name="SideWaffleNewProjNode" Value="CSharp\Web\SideWaffle"/>
+      <CustomParameter Name="SideWaffleNewProjNode" Value="CSharp\Extensibility\SideWaffle"/>
     </CustomParameters>
   </TemplateContent>
   <WizardExtension>

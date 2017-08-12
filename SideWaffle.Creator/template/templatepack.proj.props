@@ -1,5 +1,0 @@
-<Project>
-  <ItemGroup>
-    <ExcludeFromPackage Include="$(TemplateSourceRoot)**/src/**/*" />
-  </ItemGroup>
-</Project>

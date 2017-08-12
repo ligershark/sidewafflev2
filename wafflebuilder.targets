@@ -11,7 +11,13 @@
        <may not be needed> 4.2 copy the .template.config file to obj/templates/<.vstemplate filename> </may not be needed>
        4.3 create .zip file from items and add to vsix at /output/ProjectTemplates/CSharp/<NPD node path from .vstemplate>/foo.zip
     -->
+  <PropertyGroup>
+    <WaffleBuilderPropsFilepath Condition=" '$(WaffleBuilderPropsFilepath)'=='' ">$(MSBuildThisFileFullPath).props</WaffleBuilderPropsFilepath>
+  </PropertyGroup>
 
+  <Import Project="$(WaffleBuilderPropsFilepath)"
+          Condition=" '$(WaffleBuilderPropsFilepath)' != '' and Exists('$(WaffleBuilderPropsFilepath)') " />
+  
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)'=='' ">Debug</Configuration>
     <TemplateSourceRoot Condition=" '$(TemplateSourceRoot)'=='' ">$(MSBuildProjectDirectory)\..\</TemplateSourceRoot>
@@ -39,7 +45,7 @@
 
   <Target Name="ProcessTemplates"
           DependsOnTargets="$(ProcessTemplatesDependsOn)"
-          BeforeTargets="Build"/>
+          BeforeTargets="GetVsixSourceItems"/>
 
   <!--=====================================================
     Targets related to building/handling the template .nupkg files
@@ -68,7 +74,7 @@
 
     <PropertyGroup>
       <_cTemplateProj Condition=" '%(TemplatePackNuGetProj.Identity)' != '' ">%(TemplatePackNuGetProj.Identity)</_cTemplateProj>
-      <_cTemplateProj Condition=" '%(TemplatePackNuGetProj.Identity)' != '' ">$([System.IO.Path]::GetFullPath('$(_cTemplateProj)'))</_cTemplateProj>
+      <_cTemplateProj Condition=" '$(_cTemplateProj)' != '' ">$([System.IO.Path]::GetFullPath('$(_cTemplateProj)'))</_cTemplateProj>
       <_templateOutputPathFull>$([System.IO.Path]::GetFullPath('$(TemplateOutputPath)'))</_templateOutputPathFull>
     </PropertyGroup>
     <Message Text="_templateOutputPathFull: $(_templateOutputPathFull)" />
@@ -169,8 +175,8 @@ _vstemplatefullpath: $(_vstemplatefullpath)
     -->
     <PropertyGroup>
       <_filename>%(VsTemplateFiles.Filename)</_filename>
-      <_zipoutfile>$(TemplateOutputPath)$(_filename).zip</_zipoutfile>
-      <_ziprootdir>%(VsTemplateZipDefaultFiles.RootDir)%(VsTemplateZipDefaultFiles.Directory)</_ziprootdir>
+      <_zipoutfile>$([System.IO.Path]::GetFullPath('$(TemplateOutputPath)$(_filename).zip'))</_zipoutfile>
+      <_ziprootdir>$([System.IO.Path]::GetFullPath('%(VsTemplateZipDefaultFiles.RootDir)%(VsTemplateZipDefaultFiles.Directory)'))</_ziprootdir>
       <_vstemplatedir>$([System.IO.Path]::GetFullPath('%(VsTemplateFiles.RootDir)%(VsTemplateFiles.Directory)'))</_vstemplatedir>
       <_vstemplatefullpath>$([System.IO.Path]::GetFullPath('%(VsTemplateFiles.Fullpath)'))</_vstemplatefullpath>
     </PropertyGroup>
@@ -227,8 +233,8 @@ _vstemplatefullpath: $(_vstemplatefullpath)
     <ls-msbuildtasks-path Condition=" !Exists('$(ls-msbuildtasks-path)')">$(MSBuildFrameworkToolsPath)\Microsoft.Build.Tasks.v4.0.dll</ls-msbuildtasks-path>
     <ls-msbuildtasks-path Condition=" !Exists('$(ls-msbuildtasks-path)')">$(windir)\Microsoft.NET\Framework\v4.0.30319\Microsoft.Build.Tasks.v4.0.dll</ls-msbuildtasks-path>
   </PropertyGroup>
-  <UsingTask Condition="false" TaskName="AddToZipTask" AssemblyFile="C:\data\mycode\sidewafflev2\src-old\SideWafflev2\SideWaffleTasks\bin\Debug\SideWaffleTasks.dll"/>
-  <UsingTask TaskName="AddToZipTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(ls-msbuildtasks-path)">
+  <UsingTask TaskName="AddToZipTask" AssemblyFile="C:\data\mycode\sidewafflev2.1\SideWaffleTasks\bin\Debug\SideWaffleTasks.dll"/>
+  <UsingTask Condition="false" TaskName="AddToZipTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(ls-msbuildtasks-path)">
     <ParameterGroup>
       <ZipFilePath ParameterType="System.String" Required="true" />
       <FilesToAdd ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
@@ -238,10 +244,11 @@ _vstemplatefullpath: $(_vstemplatefullpath)
     <Task>
       <Reference Include="System.IO.Compression.FileSystem" />
       <Reference Include="System.IO.Compression" />
+      <Reference Include="System.Linq" />
       <Using Namespace="System.IO.Compression" />
       <Code Type="Fragment" Language="cs">
         <![CDATA[
-            Log.LogMessage(MessageImportance.High, "AddToZipTask2 called", null);
+            Log.LogMessage(MessageImportance.High, "AddToZipTask-il called", null);
 
             CompressionLevel level = CompressionLevel.Optimal;
             if (!string.IsNullOrWhiteSpace(Compression)) {
@@ -259,37 +266,53 @@ _vstemplatefullpath: $(_vstemplatefullpath)
                 Directory.CreateDirectory(parentDir);
             }
             // System.Diagnostics.Debugger.Launch();
-            using (ZipArchive zip = ZipFile.Open(ZipFilePath, System.IO.Compression.ZipArchiveMode.Update)) {
-                Uri rootFolderUri = new Uri(RootFolder);
-                // add each input file to the zip
-                foreach (var file in FilesToAdd) {
-                    // get the relative path of the file to to add
-                    string filePath = file.GetMetadata("FullPath");
-                    Uri fileUri = new Uri(filePath);
-                    string relpath = Uri.UnescapeDataString(
-                                            rootFolderUri.MakeRelativeUri(fileUri)
-                                                .ToString()
-                                                .Replace('/', Path.DirectorySeparatorChar)
-                                            );
+            try{
+                using (ZipArchive zip = ZipFile.Open(ZipFilePath, System.IO.Compression.ZipArchiveMode.Update)) {
+                    Uri rootFolderUri = new Uri(RootFolder);
+                    // add each input file to the zip
+                    foreach (var file in FilesToAdd) {
+                        // get the relative path of the file to to add
+                        string filePath = file.GetMetadata("FullPath");
+                        Uri fileUri = new Uri(filePath);
+                        string relpath = Uri.UnescapeDataString(
+                                                rootFolderUri.MakeRelativeUri(fileUri)
+                                                    .ToString()
+                                                    .Replace('/', Path.DirectorySeparatorChar)
+                                                );
 
-                    Log.LogMessage("Update zip: [{0}], add file: [{1}], relpath: [{2}]", ZipFilePath, filePath, relpath);
+                        Log.LogMessage("Update zip: [{0}], add file: [{1}], relpath: [{2}]", ZipFilePath, filePath, relpath);
 
-                    var entriesToDelete = new List<ZipArchiveEntry>();
-                    // if the file is already in the zip remove it and add again
-                    if (zip.Entries != null) {
-                        foreach (var entry in zip.Entries) {
-                            if (entry.FullName.Equals(relpath, StringComparison.OrdinalIgnoreCase)) {
-                                entriesToDelete.Add(entry);
+                        // var entriesToDelete = new List<ZipArchiveEntry>();
+                        // if the file is already in the zip remove it and add again                        
+                        if (zip.Entries != null && zip.Entries.Count > 0) {
+                            List<ZipArchiveEntry> entries = zip.Entries.ToList();
+                            foreach (var entry in entries) {
+                                if (entry.FullName.Equals(relpath, StringComparison.OrdinalIgnoreCase)) {
+                                    // entriesToDelete.Add(entry);
+                                    Log.LogMessage(MessageImportance.Low, "deleting zip entry for [{0}]", relpath);
+                                    entry.Delete();
+                                }
                             }
                         }
+                        //if(entriesToDelete != null && entriesToDelete.Count > 0){
+                        //    foreach(var entry in entriesToDelete) {
+                        //        try {
+                        //            entry.Delete();
+                        //        }
+                        //        catch(Exception ex){
+                        //            Log.LogMessage(MessageImportance.Low, "Unable to delete entry from zip. {0}", ex.ToString());
+                        //        }
+                        //    }
+                        //}
+                        ZipFileExtensions.CreateEntryFromFile(zip, filePath, relpath, level);
                     }
-                    foreach(var entry in entriesToDelete) {
-                        entry.Delete();
-                    }
-
-                    ZipFileExtensions.CreateEntryFromFile(zip, filePath, relpath, level);
                 }
             }
+            catch(Exception ex){
+                Log.LogError(ex.ToString());
+                return false;
+            }
+
             return true;
     ]]>
       </Code>

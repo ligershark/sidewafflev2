@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>WaffleBuilder</id>
+    <version>0.0.1-beta</version>
+    <authors>Sayed Ibrahim Hashimi</authors>
+    <owners>Sayed Ibrahim Hashimi</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/ligershark/side-waffle</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/ligershark/side-waffle/master/TemplatePack/logo_small.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      A NuGet package which can be used to easily create item and project templates for Visual Studio
+      using the dotnet Template Engine (https://github.com/dotnet/templating).
+    </description>
+    <!-- <releaseNotes></releaseNotes> -->
+    <copyright>Copyright 2017 Sayed Ibrahim Hashimi</copyright>
+    <tags>SideWaffle Templates TemplateBuilder Template Builder VSIX VisualStudio Visual Studio Extensibility</tags>
+    <!--<dependencies>
+      <dependency id="SampleDependency" version="1.0" />
+    </dependencies>-->
+  </metadata>
+  <files>
+    <file src="wafflebuilder.targets" target="build" />
+    <file src="templatepack.proj" target="build\project-icon.png" />
+    <file src="templatepack.proj" target="content\template" />
+</files>
+</package>

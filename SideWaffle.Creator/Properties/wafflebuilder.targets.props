@@ -1,0 +1,8 @@
+<Project>
+  <PropertyGroup>
+    <TemplateSourceRoot Condition=" '$(TemplateSourceRoot)'=='' ">$(MSBuildThisFileDirectory)../../templates/</TemplateSourceRoot>
+  </PropertyGroup>
+  <!--<ItemGroup>
+    <ExcludeFromPackage Include="$(TemplateSourceRoot)**/src/**/*" />
+  </ItemGroup>-->
+</Project>
