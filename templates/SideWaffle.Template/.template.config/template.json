@@ -4,13 +4,13 @@
   "classifications": [ "VisualStudioExtension" ], 
   "name": "Template Pack Project",
   "identity": "SideWafflev2.TemplatePackProject.CSharp",         
-  "groupIdentity":"SideWafflev2.TemplatePackProject.",
+  "groupIdentity":"SideWafflev2.TemplatePackProject",
   "shortName": "templatepack",
   "tags": {
     "language": "C#",
     "type":"project"
   },
-  "sourceName": "SideWaffle.TemplateProject",
+  "sourceName": "SideWaffle.Template",
   "preferNameDirectory":true,
-  "primaryOutputs": [ { "path": "SideWaffle.TemplateProject.csproj" } ]
+  "primaryOutputs": [ { "path": "SideWaffle.Template.csproj" } ]
 }

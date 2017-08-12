@@ -29,10 +29,10 @@ namespace SideWaffle.Creator
             get; private set;
         }
 
-        private IServiceProvider ServiceProvider
-        {
-            get { return _package; }
-        }
+        //private IServiceProvider ServiceProvider
+        //{
+        //    get { return _package; }
+        //}
 
         public static void Initialize(Package package, OleMenuCommandService commandService)
         {

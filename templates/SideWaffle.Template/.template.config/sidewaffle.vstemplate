@@ -20,7 +20,7 @@
     <CustomParameters>
       <CustomParameter Name="$language$" Value="CSharp" />
       <CustomParameter Name="$uistyle$" Value="none"/>
-      <CustomParameter Name="$groupid$" Value="MyProject.01.Sample" />
+      <CustomParameter Name="$groupid$" Value="SideWafflev2.TemplatePackProject" />
       <CustomParameter Name="SideWaffleNewProjNode" Value="CSharp\Extensibility\SideWaffle"/>
     </CustomParameters>
   </TemplateContent>

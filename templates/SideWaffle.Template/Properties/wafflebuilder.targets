@@ -1,4 +1,5 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--/-:cnd -->
   <!--
     1. Find templatepack proj files
     2. Foreach templatepack proj file
