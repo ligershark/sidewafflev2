@@ -94,16 +94,21 @@ namespace TemplateCreator {
                     const string solutionTemplate = @"{
     ""author"": """",
     ""classifications"": [ ],
-    ""description"": """",
-    ""name"": """",
-    ""defaultName"": """",
-    ""identity"": """",
-    ""groupIdentity"": """",
-    ""tags"": { },
-    ""shortName"": """",
-    ""sourceName"": """",
-    ""guids"": [ ]
-}";
+    ""description"": ""template description"",
+    ""name"": ""templatename"",
+    ""defaultName"": ""myproject"",
+    ""identity"": ""Sample.Template.CSharp"",
+    ""groupIdentity"": ""Sample.Template"",
+    ""tags"": {
+        ""language"": ""C#"",
+        ""type"": ""project""
+    },
+    ""shortName"": ""myproj"",
+    ""sourceName"": ""My.Project"",
+    ""guids"": [ ],
+    ""primaryOutputs"": [ { ""path"": ""My.Project.csproj"" } ]
+}
+            ";
 
                     var o = JObject.Parse(solutionTemplate);
                     o["author"] = win.AuthorTextBox.Text;
@@ -155,7 +160,7 @@ namespace TemplateCreator {
     <CustomParameters>
       <CustomParameter Name = ""$language$"" Value=""CSharp"" />
       <CustomParameter Name = ""$uistyle$"" Value=""none""/>
-      <CustomParameter Name = ""$groupid$"" Value=""MyProject.01.Sample"" />
+      <CustomParameter Name = ""$groupid$"" Value=""Sample.Template"" />
       <CustomParameter Name = ""SideWaffleNewProjNode"" Value=""CSharp\Web\SideWaffle""/>
     </CustomParameters>
   </TemplateContent>
