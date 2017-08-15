@@ -18,16 +18,24 @@ namespace SideWaffle.Creator
             : this()
         {
             AuthorTextBox.Text = "Me";
-            FriendlyNameTextBox.Text = name;
-            DefaultNameTextBox.Text = name;
-            ShortNameTextBox.Text = name;
+            IdentityTextBox.Text = "Sample.Template.CSharp";
+            GroupIdTextBox.Text = "Sample.Template";
+            DefaultNameTextBox.Text = "MyProject";
+            ShortNameTextBox.Text = "";
+            DisplayNameTextBox.Text = "";
         }
 
-        public string FriendlyName => FriendlyNameTextBox.Text;
+        public string Identity => IdentityTextBox.Text;
+
+        public string GroupIdentity => GroupIdTextBox.Text;
+
+        public string Author => AuthorTextBox.Text;
 
         public string DefaultName => DefaultNameTextBox.Text;
 
         public string ShortName => ShortNameTextBox.Text;
+
+        public string DisplayName => DisplayNameTextBox.Text;
 
         public void CenterInVs()
         {

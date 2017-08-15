@@ -35,7 +35,7 @@ namespace SideWaffle.Creator
 
                 var o = JObject.Parse(solutionTemplate);
                 o["author"] = win.AuthorTextBox.Text;
-                o["name"] = win.FriendlyNameTextBox.Text;
+                o["name"] = win.IdentityTextBox.Text;
                 o["defaultName"] = win.DefaultNameTextBox.Text;
                 o["sourceName"] = Path.GetFileNameWithoutExtension(proj.FullName);
                 o["shortName"] = win.ShortNameTextBox.Text;
@@ -85,7 +85,7 @@ namespace SideWaffle.Creator
 
                 var o = JObject.Parse(solutionTemplate);
                 o["author"] = win.AuthorTextBox.Text;
-                o["name"] = win.FriendlyNameTextBox.Text;
+                o["name"] = win.IdentityTextBox.Text;
                 o["defaultName"] = win.DefaultNameTextBox.Text;
                 o["sourceName"] = Path.GetFileNameWithoutExtension(projectFilepath);
                 o["shortName"] = win.ShortNameTextBox.Text;

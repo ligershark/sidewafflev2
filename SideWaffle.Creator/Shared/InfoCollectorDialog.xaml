@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d" WindowStyle="ToolWindow" ResizeMode="NoResize" Title="Template Info"
-        ShowInTaskbar="False" Width="340" Height="240" WindowStartupLocation="CenterOwner">
+        ShowInTaskbar="False" Width="505.892" Height="277.646" WindowStartupLocation="CenterOwner">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -16,24 +16,32 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="WrapWithOverflow" Margin="5,0,0,10">This will create a '.template.config' folder in the root of the project.</TextBlock>
 
-        <Label Grid.Row="1" Grid.Column="0" Width="100">Author</Label>
+        <Label Grid.Row="1" Grid.Column="0">Author</Label>
         <TextBox Grid.Row="1" Grid.Column="1" x:Name="AuthorTextBox" Margin="2" />
 
-        <Label Grid.Row="2" Grid.Column="0">Friendly Name</Label>
-        <TextBox Grid.Row="2" Grid.Column="1" x:Name="FriendlyNameTextBox" Margin="2" />
+        <Label Grid.Row="2" Grid.Column="0" ToolTip="Name used when creating templates on the cli, ex dotnet new mvc. mvc is the short name">Short name</Label>
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="ShortNameTextBox" Margin="2" />
 
-        <Label Grid.Row="3" Grid.Column="0">Default Name</Label>
-        <TextBox Grid.Row="3" Grid.Column="1" x:Name="DefaultNameTextBox" Margin="2" />
+        <Label Grid.Row="3" Grid.Column="0" ToolTip="Template identity, ex: Sample.Template.CSharp">Identity</Label>
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="IdentityTextBox" Margin="2" />
 
-        <Label Grid.Row="4" Grid.Column="0">Short Name</Label>
-        <TextBox Grid.Row="4" Grid.Column="1" x:Name="ShortNameTextBox" Margin="2" />
+        <Label Grid.Row="4" Grid.Column="0" ToolTip="Template group identity, ex Sample.Template. This is typically a substrig of Identity.">Group identity</Label>
+        <TextBox Grid.Row="4" Grid.Column="1" x:Name="GroupIdTextBox" Margin="2" />
 
-        <StackPanel Orientation="Horizontal" Grid.Row="6" HorizontalAlignment="Right" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,0">
+        <Label Grid.Row="5" Grid.Column="0" ToolTip="Default project name used when creating new projects">Default project name</Label>
+        <TextBox Grid.Row="5" Grid.Column="1" x:Name="DefaultNameTextBox" Margin="2" />
+
+        <Label Grid.Row="6" Grid.Column="0" ToolTip="Shown in VS as template name, and on the cli dotnet new --list">Display name</Label>
+        <TextBox Grid.Row="6" Grid.Column="1" x:Name="DisplayNameTextBox" Margin="2" />
+
+
+        <StackPanel Orientation="Horizontal" Grid.Row="7" HorizontalAlignment="Right" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,0">
             <Button Click="OnOk" Width="80" Margin="3" IsDefault="True">OK</Button>
             <Button Click="OnCancel" Width="80" Margin="3" IsCancel="True">Cancel</Button>
         </StackPanel>

@@ -38,14 +38,21 @@ namespace TemplateCreator {
 
             IList<string> filesCreated = new List<string>();
             JObject templateData = GetTemplateJsonDataFromUser(proj);
-            filesCreated.Add(
-                CreateTemplateJsonIfNotExists(Path.Combine(templateJsonDir, "template.json"), proj.FullName, templateData));
-            filesCreated.Add(
-                CreateVsTemplateFileIfNotExists(Path.Combine(templateJsonDir, "template.vstemplate"), proj.FullName, templateData));
+            if (templateData != null)
+            {
+                filesCreated.Add(
+                    CreateTemplateJsonIfNotExists(Path.Combine(templateJsonDir, "template.json"), proj.FullName, templateData));
+                filesCreated.Add(
+                    CreateVsTemplateFileIfNotExists(Path.Combine(templateJsonDir, "template.vstemplate"), proj.FullName, templateData));
 
-            return (from file in filesCreated
-                    where !string.IsNullOrWhiteSpace(file)
-                    select file).ToList();
+                return (from file in filesCreated
+                        where !string.IsNullOrWhiteSpace(file)
+                        select file).ToList();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         private string CreateTemplateJsonIfNotExists(string templateJsonPath, string projectFilepath, JObject templateData) {
@@ -79,7 +86,9 @@ namespace TemplateCreator {
             string name = templateData["name"].Value<string>();
             string desc = templateData["description"].Value<string>();
             string templateId = templateData["identity"].Value<string>();
-            var templateContent = string.Format(_vstemplateFile, name, desc, templateId);
+            string defaultName = templateData["defaultName"].Value<string>();
+            string groupId = templateData["groupIdentity"].Value<string>();
+            var templateContent = string.Format(_vstemplateFile, name, desc, templateId, defaultName, groupId);
             File.WriteAllText(vstemplateFilepath, templateContent);
             return vstemplateFilepath;
         }
@@ -92,40 +101,43 @@ namespace TemplateCreator {
                 win.CenterInVs();
                 if (win.ShowDialog().GetValueOrDefault()) {
                     const string solutionTemplate = @"{
-    ""author"": """",
+    ""author"": ""<will-be-inserted>"",
     ""classifications"": [ ],
     ""description"": ""template description"",
-    ""name"": ""templatename"",
-    ""defaultName"": ""myproject"",
+    ""name"": ""<will-be-inserted>"",
+    ""defaultName"": ""<will-be-inserted>"",
     ""identity"": ""Sample.Template.CSharp"",
     ""groupIdentity"": ""Sample.Template"",
     ""tags"": {
         ""language"": ""C#"",
         ""type"": ""project""
     },
-    ""shortName"": ""myproj"",
-    ""sourceName"": ""My.Project"",
+    ""shortName"": """",
+    ""sourceName"": """",
     ""guids"": [ ],
-    ""primaryOutputs"": [ { ""path"": ""My.Project.csproj"" } ]
+    ""primaryOutputs"": [ { ""path"": """" } ]
 }
             ";
 
-                    var o = JObject.Parse(solutionTemplate);
-                    o["author"] = win.AuthorTextBox.Text;
-                    o["name"] = win.FriendlyNameTextBox.Text;
-                    o["defaultName"] = win.DefaultNameTextBox.Text;
-                    o["sourceName"] = Path.GetFileNameWithoutExtension(proj.FullName);
-                    o["shortName"] = win.ShortNameTextBox.Text;
+                var o = JObject.Parse(solutionTemplate);
+                o["author"] = win.Author;
+                o["identity"] = win.Identity;
+                o["groupIdentity"] = win.GroupIdentity;
+                o["name"] = win.DisplayName;
+                o["defaultName"] = win.DefaultName;
+                o["sourceName"] = Path.GetFileNameWithoutExtension(fullPath);
+                o["shortName"] = win.ShortName;
+                o["primaryOutputs"][0]["path"] = Path.GetFileName(fullPath);
 
-                    var guids = (JArray)o["guids"];
-                    string projectGuid = ExtractProjectGuid(fullPath);
+                var guids = (JArray)o["guids"];
+                string projectGuid = ExtractProjectGuid(fullPath);
 
-                    if (!string.IsNullOrEmpty(projectGuid)) {
-                        guids.Add(ExtractProjectGuid(fullPath));
-                    }
-
-                    _templateInfo = o;
+                if (!string.IsNullOrEmpty(projectGuid)) {
+                    guids.Add(ExtractProjectGuid(fullPath));
                 }
+
+                _templateInfo = o;
+            }
             //}
 
             return _templateInfo;
@@ -143,7 +155,7 @@ namespace TemplateCreator {
     <Name>{0}</Name>
     <Description>{1}</Description>
     <TemplateID>{2}</TemplateID>
-    <DefaultName>NewProject</DefaultName>
+    <DefaultName>{3}</DefaultName>
     
     <Icon>project-icon.png</Icon>
     
@@ -160,7 +172,7 @@ namespace TemplateCreator {
     <CustomParameters>
       <CustomParameter Name = ""$language$"" Value=""CSharp"" />
       <CustomParameter Name = ""$uistyle$"" Value=""none""/>
-      <CustomParameter Name = ""$groupid$"" Value=""Sample.Template"" />
+      <CustomParameter Name = ""$groupid$"" Value=""{4}"" />
       <CustomParameter Name = ""SideWaffleNewProjNode"" Value=""CSharp\Web\SideWaffle""/>
     </CustomParameters>
   </TemplateContent>
