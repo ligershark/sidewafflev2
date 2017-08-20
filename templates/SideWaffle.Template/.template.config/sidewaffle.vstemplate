@@ -1,6 +1,6 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="ProjectGroup">
   <TemplateData>
-    <Name>Template pack project template (SideWaffle)</Name>
+    <Name>Template Pack Project Template (SideWaffle)</Name>
     <Description>Makes it easy to create a template pack</Description>
     <TemplateID>SideWaffle.TemplatePack.01</TemplateID>
     <DefaultName>VsixProject</DefaultName>
