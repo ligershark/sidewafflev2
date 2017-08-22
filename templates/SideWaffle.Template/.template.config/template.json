@@ -11,6 +11,14 @@
     "type":"project"
   },
   "sourceName": "SideWaffle.Template",
+  "guids": [
+    // projectid
+    "{6F5F4E73-4DB4-4031-8C9B-5A6DA2BFF5FA}",
+    // ID in source.extension.vsixmaifest
+    "8d06eaa5-afae-4ccb-957f-174f42fc6b25",
+    // path in template.pkgdef
+    "b9366a69-f268-42c0-8bae-0d4ff462c07f"
+  ],
   "preferNameDirectory":true,
   "primaryOutputs": [ { "path": "SideWaffle.Template.csproj" } ]
 }

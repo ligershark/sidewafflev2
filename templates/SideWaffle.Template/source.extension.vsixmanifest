@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="SideWaffle.Template.Sayed Hashimi.0f7f23b8-5889-4bd9-afc5-362f23135512" Version="1.0" Language="en-US" Publisher="Sayed Hashimi" />
-    <DisplayName>SideWaffle.Template</DisplayName>
-    <Description>Empty VSIX Project.</Description>
+    <Identity Id="8d06eaa5-afae-4ccb-957f-174f42fc6b25" Version="1.0" Language="en-US" Publisher="Author Name" />
+    <DisplayName>My Custom Project Template</DisplayName>
+    <Description>My Custom Project Template. Created with SideWaffle</Description>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0]" />

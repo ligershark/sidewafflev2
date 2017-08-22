@@ -69,7 +69,6 @@
     <WaffleBuilderTargetsPath Condition=" '$(WaffleBuilderTargetsPath)'=='' ">$(MSBuildProjectDirectory)\Properties\wafflebuilder.targets</WaffleBuilderTargetsPath>
   </PropertyGroup>
   <Import Project="$(WaffleBuilderTargetsPath)" Condition="Exists('$(WaffleBuilderTargetsPath)')" />
-  <!--/-:cnd -->
   <Target Name="WarnOnMissingWaffleBuilderTargets" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
