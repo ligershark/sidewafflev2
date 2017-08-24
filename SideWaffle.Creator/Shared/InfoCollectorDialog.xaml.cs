@@ -21,8 +21,9 @@ namespace SideWaffle.Creator
             IdentityTextBox.Text = "Sample.Template.CSharp";
             GroupIdTextBox.Text = "Sample.Template";
             DefaultNameTextBox.Text = "MyProject";
-            ShortNameTextBox.Text = "";
-            DisplayNameTextBox.Text = "";
+            ShortNameTextBox.Text = string.Empty;
+            DisplayNameTextBox.Text = string.Empty;
+            DescriptionTextBox.Text = string.Empty;
         }
 
         public string Identity => IdentityTextBox.Text;
@@ -36,6 +37,8 @@ namespace SideWaffle.Creator
         public string ShortName => ShortNameTextBox.Text;
 
         public string DisplayName => DisplayNameTextBox.Text;
+
+        public string Description => DescriptionTextBox.Text;
 
         public void CenterInVs()
         {
