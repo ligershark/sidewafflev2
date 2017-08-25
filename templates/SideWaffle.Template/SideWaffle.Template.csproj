@@ -54,7 +54,7 @@
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
-    <None Include="template\templatepack.proj" />
+    <None Include="template\templatepack.SideWaffle.Template.proj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\project-icon.png" />

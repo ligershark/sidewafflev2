@@ -123,8 +123,8 @@ function CopyStaticFilesToOtherProjects{
             'Dest' = (join-path $srcRoot 'SideWaffle.Creator\template\templatepack.proj')
         },#>
         @{
-            'Source'=(Join-Path $srcRoot 'templatepack.proj')
-            'Dest' = (join-path $srcRoot 'templates\SideWaffle.Template\template\templatepack.proj')
+            'Source'=(Join-Path $srcRoot 'templatepack.SideWaffle.Template.proj')
+            'Dest' = (join-path $srcRoot 'templates\SideWaffle.Template\template\templatepack.SideWaffle.Template.proj')
         },
 
         @{
