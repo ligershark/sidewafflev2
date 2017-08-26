@@ -7,18 +7,23 @@ using System;
 using System.Collections.Generic;
 using SideWaffle.Creator;
 
-namespace TemplateCreator {
-    public class TemplateGenerator2 {
+namespace TemplateCreator
+{
+    public class TemplateGenerator2
+    {
         private JObject _templateInfo { get; set; }
-        public IList<string> AddMissingFiles(Project proj) {
-            if (proj == null) {
+        public IList<string> AddMissingFiles(Project proj)
+        {
+            if (proj == null)
+            {
                 throw new ArgumentNullException("proj");
             }
 
             string projectName = Path.GetFileNameWithoutExtension(proj.FullName);
             string projectDir = Path.GetDirectoryName(proj.FullName);
             string templateJsonDir = Path.Combine(projectDir, ".template.config");
-            if (!Directory.Exists(templateJsonDir)) {
+            if (!Directory.Exists(templateJsonDir))
+            {
                 Directory.CreateDirectory(templateJsonDir);
             }
             // see which files are missing and add then create those
@@ -31,7 +36,8 @@ namespace TemplateCreator {
             if (hasTemplateJsonFile &&
                 hasVsHostFile &&
                 hasVstemplateFile &&
-                hasCliHostFile) {
+                hasCliHostFile)
+            {
                 // nothing to do
                 return null;
             }
@@ -55,15 +61,19 @@ namespace TemplateCreator {
             }
         }
 
-        private string CreateTemplateJsonIfNotExists(string templateJsonPath, string projectFilepath, JObject templateData) {
-            if (templateJsonPath == null) {
+        private string CreateTemplateJsonIfNotExists(string templateJsonPath, string projectFilepath, JObject templateData)
+        {
+            if (templateJsonPath == null)
+            {
                 throw new ArgumentNullException("filepath");
             }
-            if (templateData == null) {
+            if (templateData == null)
+            {
                 throw new ArgumentNullException("templateData");
             }
 
-            if (File.Exists(templateJsonPath)) {
+            if (File.Exists(templateJsonPath))
+            {
                 return null;
             }
 
@@ -71,15 +81,19 @@ namespace TemplateCreator {
             return templateJsonPath;
         }
 
-        private string CreateVsTemplateFileIfNotExists(string vstemplateFilepath, string projectFilepath, JObject templateData) {
-            if (string.IsNullOrWhiteSpace(vstemplateFilepath)) {
+        private string CreateVsTemplateFileIfNotExists(string vstemplateFilepath, string projectFilepath, JObject templateData)
+        {
+            if (string.IsNullOrWhiteSpace(vstemplateFilepath))
+            {
                 throw new ArgumentNullException("vstemplateFilepath");
             }
-            if (templateData == null) {
+            if (templateData == null)
+            {
                 throw new ArgumentNullException("templateData");
             }
 
-            if (File.Exists(vstemplateFilepath)) {
+            if (File.Exists(vstemplateFilepath))
+            {
                 return null;
             }
             // name, description, templateid
@@ -93,17 +107,19 @@ namespace TemplateCreator {
             return vstemplateFilepath;
         }
 
-        private JObject GetTemplateJsonDataFromUser(Project proj) {
+        private JObject GetTemplateJsonDataFromUser(Project proj)
+        {
             //if (_templateInfo == null) {
-                string fullPath = proj.FullName;
-                string name = Path.GetFileNameWithoutExtension(fullPath);
-                var win = new InfoCollectorDialog(name);
-                win.CenterInVs();
-                if (win.ShowDialog().GetValueOrDefault()) {
-                    const string solutionTemplate = @"{
+            string fullPath = proj.FullName;
+            string name = Path.GetFileNameWithoutExtension(fullPath);
+            var win = new InfoCollectorDialog(name);
+            win.CenterInVs();
+            if (win.ShowDialog().GetValueOrDefault())
+            {
+                const string solutionTemplate = @"{
     ""author"": ""<will-be-inserted>"",
     ""classifications"": [ ],
-    ""description"": ""template description"",
+    ""description"": ""<will-be-inserted>"",
     ""name"": ""<will-be-inserted>"",
     ""defaultName"": ""<will-be-inserted>"",
     ""identity"": ""Sample.Template.CSharp"",
@@ -128,11 +144,13 @@ namespace TemplateCreator {
                 o["sourceName"] = Path.GetFileNameWithoutExtension(fullPath);
                 o["shortName"] = win.ShortName;
                 o["primaryOutputs"][0]["path"] = Path.GetFileName(fullPath);
+                o["description"] = win.Description;
 
                 var guids = (JArray)o["guids"];
                 string projectGuid = ExtractProjectGuid(fullPath);
 
-                if (!string.IsNullOrEmpty(projectGuid)) {
+                if (!string.IsNullOrEmpty(projectGuid))
+                {
                     guids.Add(ExtractProjectGuid(fullPath));
                 }
 
@@ -143,7 +161,8 @@ namespace TemplateCreator {
             return _templateInfo;
         }
 
-        private string ExtractProjectGuid(string fullPath) {
+        private string ExtractProjectGuid(string fullPath)
+        {
             var doc = XDocument.Load(fullPath);
             XElement element = doc.Descendants().FirstOrDefault(x => x.Name.LocalName == "ProjectGuid");
             return element?.Value;
