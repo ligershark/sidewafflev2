@@ -24,8 +24,8 @@
     <ExcludeFromPackage Include="$(TemplateSourceRoot)**/obj/**/*" />
     <ExcludeFromPackage Include="$(TemplateSourceRoot)**/*.user" />
     <ExcludeFromPackage Include="$(TemplateSourceRoot)**/*.suo" />
-    <ExcludeFromPackage Include="$(TemplateSourceRoot)**/*.vs/**/*" />
-    <ExcludeFromPackage Include="$(TemplateSourceRoot)**/*.git/**/*" />
+    <ExcludeFromPackage Include="$(TemplateSourceRoot)**/.vs/**/*" />
+    <ExcludeFromPackage Include="$(TemplateSourceRoot)**/.git/**/*" />
 
     <TemplateFiles  Include="$(TemplateSourceRoot)/**/*" 
                     Exclude="@(ExcludeFromPackage)" />
