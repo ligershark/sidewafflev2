@@ -22,10 +22,10 @@ namespace TemplateCreator
             string projectName = Path.GetFileNameWithoutExtension(proj.FullName);
             string projectDir = Path.GetDirectoryName(proj.FullName);
             string templateJsonDir = Path.Combine(projectDir, ".template.config");
-            if (!Directory.Exists(templateJsonDir))
-            {
-                Directory.CreateDirectory(templateJsonDir);
-            }
+            //if (!Directory.Exists(templateJsonDir))
+            //{
+            //    Directory.CreateDirectory(templateJsonDir);
+            //}
             // see which files are missing and add then create those
 
             bool hasTemplateJsonFile = File.Exists(Path.Combine(templateJsonDir, "template.json"));
@@ -60,7 +60,14 @@ namespace TemplateCreator
                 return null;
             }
         }
-
+        private void EnsureParentDirectoryExists(string filepath)
+        {
+            string parentdir = Path.GetDirectoryName(filepath);
+            if (!Directory.Exists(parentdir))
+            {
+                Directory.CreateDirectory(parentdir);
+            }
+        }
         private string CreateTemplateJsonIfNotExists(string templateJsonPath, string projectFilepath, JObject templateData)
         {
             if (templateJsonPath == null)
@@ -76,7 +83,7 @@ namespace TemplateCreator
             {
                 return null;
             }
-
+            EnsureParentDirectoryExists(templateJsonPath);
             File.WriteAllText(templateJsonPath, templateData.ToString());
             return templateJsonPath;
         }
@@ -103,6 +110,7 @@ namespace TemplateCreator
             string defaultName = templateData["defaultName"].Value<string>();
             string groupId = templateData["groupIdentity"].Value<string>();
             var templateContent = string.Format(_vstemplateFile, name, desc, templateId, defaultName, groupId);
+            EnsureParentDirectoryExists(vstemplateFilepath);
             File.WriteAllText(vstemplateFilepath, templateContent);
             return vstemplateFilepath;
         }
