@@ -14,7 +14,6 @@ Read more about the [new template format here](https://blogs.msdn.microsoft.com/
 
 - Generate template file
 - Add Visual Studio host file
-- Add .NET CLI host file
 
 ### Generate template file
 Right-click the project you want to turn into a template and click *Create Template...*.
@@ -24,23 +23,6 @@ Right-click the project you want to turn into a template and click *Create Templ
 That will create a folder called *.template.config* and add a file called *template.json* to it. The folder is not being added to the project, but exist on disk in the root of the project directory.
 
 ![Solution Explorer](art/solution-explorer.png)
-
-## Add Visual Studio/.NET CLI host files
-To have the template show up in the ASP.NET project dialog, you need to add a Visual Studio specific host file to the *.template.config* folder.
-
-![Add host files](art/add-host-files.png)
-
-To control the CLI experience using *dotnet new* you need a .NET CLI specific host file.
-
-## Contribute
-Check out the [contribution guidelines](.github/CONTRIBUTING.md)
-if you want to contribute to this project.
-
-For cloning and building this project yourself, make sure
-to install the
-[Extensibility Tools](https://visualstudiogallery.msdn.microsoft.com/ab39a092-1343-46e2-b0f1-6a3f91155aa6)
-extension for Visual Studio which enables some features
-used by this project.
 
 ## License
 [Apache 2.0](LICENSE)
