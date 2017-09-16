@@ -1,8 +1,6 @@
 # SideWaffle Template Creator
 
-<!--
-Download this extension from the [VS Marketplace](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TemplateCreator)
--->
+Download this extension from the [VS Marketplace](https://marketplace.visualstudio.com/items?itemName=Sayed-Ibrahim-Hashimi.SidewaffleCreator2017)
 
 ---------------------------------------
 
