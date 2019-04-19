@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="bb9484e2-e28a-40a2-9e56-65395df09da8" Version="1.1" Language="en-US" Publisher="Sayed Ibrahim Hashimi" />
+        <Identity Id="bb9484e2-e28a-40a2-9e56-65395df09da8" Version="1.2" Language="en-US" Publisher="Sayed Ibrahim Hashimi" />
         <DisplayName>SideWaffle.Creator</DisplayName>
         <Description xml:space="preserve">Simplifies project template creation and maintenence.</Description>
         <MoreInfo>https://github.com/ligershark/side-waffle</MoreInfo>
