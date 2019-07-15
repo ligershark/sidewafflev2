@@ -4,6 +4,10 @@ Download this extension from the [VS Marketplace](https://marketplace.visualstud
 
 ---------------------------------------
 
+See the videos at https://www.youtube.com/playlist?list=PLqSOaIdv36hQdvGVkMXDJJ4Uh-nGj3NRK for some additional info on how to create project templates.
+
+---------------------------------------
+
 Makes it easy to create custom project templates for 'dotnet new' and Visual Studio.
 
 Read more about the [new template format here](https://blogs.msdn.microsoft.com/dotnet/2017/04/02/how-to-create-your-own-templates-for-dotnet-new/) and how to create and customize your templates. This extension makes it easy to get started, but you need to understand how the underlying templating system works to take full advantage of it.
